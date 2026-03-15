@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="th" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Website Development</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=Noto+Sans+Thai:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Outfit', 'Noto Sans Thai', sans-serif; }
+    html, body { height: 100%; margin: 0; }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a3e 30%, #2d1b69 60%, #1a1a3e 100%);
+    }
+    
+    .card-glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+    }
+    
+    .card-glass:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(139,92,246,0.3);
+    }
+    
+    .glow-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #a78bfa, #c084fc, transparent);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #6d28d9, #9333ea);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(139,92,246,0.4);
+    }
+    
+    .btn-download {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.3);
+      transition: all 0.3s ease;
+    }
+    .btn-download:hover {
+      background: rgba(139,92,246,0.3);
+      border-color: rgba(139,92,246,0.6);
+      transform: translateY(-1px);
+    }
+    
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #c4b5fd;
+    }
+    
+    .section-title {
+      background: linear-gradient(135deg, #e0d4fc, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .progress-bar {
+      background: linear-gradient(90deg, #7c3aed, #a855f7, #c084fc);
+    }
+    
+    .timeline-dot {
+      box-shadow: 0 0 12px rgba(139,92,246,0.6);
+    }
+    
+    .grid-pattern {
+      background-image: radial-gradient(rgba(139,92,246,0.08) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim-fade-up { animation: fadeUp 0.7s ease forwards; }
+    .anim-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .anim-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .anim-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .anim-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .anim-delay-5 { animation-delay: 0.5s; opacity: 0; }
+    
+    .week-row { transition: all 0.3s ease; }
+    .week-row:hover { background: rgba(139,92,246,0.08); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f0f1a; }
+    ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 3px; }
+
+    .grade-cell {
+      background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(192,132,252,0.05));
+      border: 1px solid rgba(139,92,246,0.15);
+    }
+
+    /* Floating Icons Animation */
+    .floating-icons-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .floating-icon {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      animation: floatDown 8s infinite ease-in;
+    }
+
+    @keyframes floatDown {
+      0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(50vh) translateX(20px) rotate(180deg) scale(0.8);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(100vh) translateX(-30px) rotate(360deg) scale(0.6);
+        opacity: 0;
+      }
+    }
+
+    .float-icon-1 { animation-delay: 0s; left: 10%; }
+    .float-icon-2 { animation-delay: 1s; left: 20%; animation-duration: 9s; }
+    .float-icon-3 { animation-delay: 2s; left: 30%; animation-duration: 10s; }
+    .float-icon-4 { animation-delay: 3s; left: 40%; animation-duration: 8.5s; }
+    .float-icon-5 { animation-delay: 0.5s; left: 50%; animation-duration: 11s; }
+    .float-icon-6 { animation-delay: 1.5s; left: 60%; animation-duration: 9.5s; }
+    .float-icon-7 { animation-delay: 2.5s; left: 70%; animation-duration: 10.5s; }
+    .float-icon-8 { animation-delay: 3.5s; left: 80%; animation-duration: 8s; }
+    .float-icon-9 { animation-delay: 0.8s; left: 90%; animation-duration: 9.5s; }
+    .float-icon-10 { animation-delay: 1.8s; left: 15%; animation-duration: 10.5s; }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: { 900: '#0f0f1a', 800: '#161628', 700: '#1e1e3a' },
+            accent: { 400: '#c4b5fd', 500: '#a78bfa', 600: '#7c3aed', 700: '#6d28d9' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-dark-900 text-gray-200">
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- Floating Icons Background -->
+   <div id="floating-icons-layer" class="floating-icons-container"></div><!-- Navigation -->
+   <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background: rgba(15,15,26,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(139,92,246,0.1);">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-violet-500/50 hover:shadow-violet-400/70 transition-all duration-300 hover:scale-110"><i data-lucide="code-2" class="w-5 h-5 text-white"></i>
+      </div><span id="nav-title" class="font-bold text-white hidden sm:inline bg-gradient-to-r from-violet-300 to-purple-300 bg-clip-text text-transparent text-base">MWD</span>
+     </div>
+     <div class="hidden md:flex items-center gap-6 text-sm"><a href="#description" class="nav-link text-gray-400">คำอธิบาย</a> <a href="#schedule" class="nav-link text-gray-400">ตารางเรียน</a> <a href="#outline" class="nav-link text-gray-400">Course Outline</a> <a href="#materials" class="nav-link text-gray-400">เอกสาร</a> <a href="#grading" class="nav-link text-gray-400">คะแนน</a> <a href="#contact" class="nav-link text-gray-400">ติดต่อ</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-gray-400 p-1"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+    </div><!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2 text-sm"><a href="#description" class="block py-2 text-gray-400 nav-link">คำอธิบายรายวิชา</a> <a href="#schedule" class="block py-2 text-gray-400 nav-link">ตารางเรียน</a> <a href="#outline" class="block py-2 text-gray-400 nav-link">Course Outline</a> <a href="#materials" class="block py-2 text-gray-400 nav-link">เอกสารประกอบ</a> <a href="#grading" class="block py-2 text-gray-400 nav-link">การเก็บคะแนน</a> <a href="#contact" class="block py-2 text-gray-400 nav-link">ติดต่อผู้สอน</a>
+    </div>
+   </nav><!-- Hero Section -->
+   <header class="hero-gradient relative overflow-hidden pt-28 pb-20 px-4 grid-pattern">
+    <div class="floating-orb w-96 h-96 bg-violet-600" style="top:-100px;right:-50px;"></div>
+    <div class="floating-orb w-72 h-72 bg-purple-500" style="bottom:-50px;left:-30px;"></div>
+    <div class="max-w-5xl mx-auto relative z-10 text-center">
+     <div class="anim-fade-up anim-delay-1"><span id="hero-semester" class="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase bg-violet-600/20 text-violet-300 border border-violet-500/20 mb-6">ภาคเรียนที่ 1/2568</span>
+     </div>
+     <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 anim-fade-up anim-delay-2">Modern Website<br>
+       Development</h1>
+     <p id="hero-code" class="text-lg text-violet-300 font-medium mb-2 anim-fade-up anim-delay-3">09114338 — 3 หน่วยกิต (2-2)</p>
+     <p id="hero-code-en" class="text-base text-violet-400/80 font-normal mb-6 anim-fade-up anim-delay-3">Modern Website Development</p>
+     <p class="text-gray-400 max-w-2xl mx-auto mb-8 anim-fade-up anim-delay-4 leading-relaxed">แนวคิดเครือข่ายคอมพิวเตอร์ อินเทอร์เน็ต และเว็บเทคโนโลยีสมัยใหม่<br class="hidden sm:inline">
+       HTML, CSS, JavaScript, AJAX, Web Framework, Bootstrap, Django, Database, และการปฏิบัติการเกี่ยวข้อง</p>
+     <div class="flex flex-wrap justify-center gap-3 anim-fade-up anim-delay-5"><a href="#outline" class="btn-primary px-6 py-3 rounded-xl text-white font-semibold text-sm inline-flex items-center gap-2"> <i data-lucide="book-open" class="w-4 h-4"></i> ดู Course Outline </a> <a href="#materials" class="btn-download px-6 py-3 rounded-xl text-violet-300 font-semibold text-sm inline-flex items-center gap-2"> <i data-lucide="download" class="w-4 h-4"></i> ดาวน์โหลดเอกสาร </a>
+     </div>
+    </div>
+   </header>
+   <main class="relative z-10"><!-- Course Description -->
+    <section id="description" class="py-20 px-4">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">คำอธิบายรายวิชา</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div>
+      <div class="card-glass rounded-2xl p-8 transition-all duration-300">
+       <p class="text-gray-300 leading-loose text-base">ศึกษาแนวคิดเครือข่ายคอมพิวเตอร์และอินเทอร์เน็ต การพัฒนาเว็บไซต์สมัยใหม่โดยใช้เว็บเทคโนโลยี เช่น HTML5, CSS3, JavaScript, XML, AJAX และเฟรมเวิร์คเว็บที่เป็นที่นิยม เช่น Bootstrap และ Django สร้างคอนเทนต์ไดนามิก เชื่อมต่อกับฐานข้อมูล SQL และ NoSQL พัฒนาทักษะการปฏิบัติการที่เกี่ยวข้อง</p>
+       <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="text-center p-4">
+         <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mx-auto mb-3"><i data-lucide="code" class="w-6 h-6 text-violet-400"></i>
+         </div>
+         <p class="text-sm font-medium text-gray-300">Frontend</p>
+         <p class="text-xs text-gray-500 mt-1">HTML / CSS / JS</p>
+        </div>
+        <div class="text-center p-4">
+         <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mx-auto mb-3"><i data-lucide="server" class="w-6 h-6 text-purple-400"></i>
+         </div>
+         <p class="text-sm font-medium text-gray-300">Backend</p>
+         <p class="text-xs text-gray-500 mt-1">Node.js / Django</p>
+        </div>
+        <div class="text-center p-4">
+         <div class="w-12 h-12 rounded-xl bg-fuchsia-600/20 flex items-center justify-center mx-auto mb-3"><i data-lucide="database" class="w-6 h-6 text-fuchsia-400"></i>
+         </div>
+         <p class="text-sm font-medium text-gray-300">Database</p>
+         <p class="text-xs text-gray-500 mt-1">SQL / NoSQL</p>
+        </div>
+        <div class="text-center p-4">
+         <div class="w-12 h-12 rounded-xl bg-pink-600/20 flex items-center justify-center mx-auto mb-3"><i data-lucide="git-branch" class="w-6 h-6 text-pink-400"></i>
+         </div>
+         <p class="text-sm font-medium text-gray-300">Version Control</p>
+         <p class="text-xs text-gray-500 mt-1">Git / GitHub</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Schedule -->
+    <section id="schedule" class="py-20 px-4 bg-dark-800/50">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">ตารางเรียน</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Lecture -->
+       <div class="card-glass rounded-2xl p-6 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-5">
+         <div class="w-10 h-10 rounded-xl bg-violet-600/20 flex items-center justify-center"><i data-lucide="book-open" class="w-5 h-5 text-violet-400"></i>
+         </div>
+         <div>
+          <h3 class="font-bold text-white">บรรยาย (Lecture)</h3>
+          <p class="text-xs text-gray-500">วันจันทร์ 13:00 – 15:00 น.</p>
+         </div>
+        </div>
+        <div class="space-y-3 text-sm">
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="calendar" class="w-4 h-4 text-violet-400 flex-shrink-0"></i> <span>วันจันทร์</span>
+         </div>
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="clock" class="w-4 h-4 text-violet-400 flex-shrink-0"></i> <span>13:00 – 15:00 น.</span>
+         </div>
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="map-pin" class="w-4 h-4 text-violet-400 flex-shrink-0"></i> <span id="schedule-lecture-room">ห้อง ST1-304 อาคาร SCI01</span>
+         </div>
+        </div>
+       </div><!-- Lab -->
+       <div class="card-glass rounded-2xl p-6 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-5">
+         <div class="w-10 h-10 rounded-xl bg-purple-600/20 flex items-center justify-center"><i data-lucide="terminal" class="w-5 h-5 text-purple-400"></i>
+         </div>
+         <div>
+          <h3 class="font-bold text-white">ปฏิบัติการ (Lab)</h3>
+          <p class="text-xs text-gray-500">วันจันทร์ 15:00 – 17:00 น.</p>
+         </div>
+        </div>
+        <div class="space-y-3 text-sm">
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="calendar" class="w-4 h-4 text-purple-400 flex-shrink-0"></i> <span>วันจันทร์</span>
+         </div>
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="clock" class="w-4 h-4 text-purple-400 flex-shrink-0"></i> <span>15:00 – 17:00 น.</span>
+         </div>
+         <div class="flex items-center gap-3 text-gray-300"><i data-lucide="map-pin" class="w-4 h-4 text-purple-400 flex-shrink-0"></i> <span id="schedule-lab-room">ห้อง ST1-304 อาคาร SCI01</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Course Outline -->
+    <section id="outline" class="py-20 px-4">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">Course Outline</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div>
+      <div class="card-glass rounded-2xl overflow-hidden">
+       <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+         <thead>
+          <tr class="bg-violet-600/10 border-b border-violet-500/10">
+           <th class="text-left px-5 py-4 text-violet-300 font-semibold w-20">สัปดาห์</th>
+           <th class="text-left px-5 py-4 text-violet-300 font-semibold">หัวข้อ Lecture</th>
+           <th class="text-left px-5 py-4 text-violet-300 font-semibold">Workshop / Lab</th>
+          </tr>
+         </thead>
+         <tbody class="text-gray-300" id="outline-body">
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">1</td>
+           <td class="px-5 py-4">Introduction to Modern Web Development</td>
+           <td class="px-5 py-4">ติดตั้งเครื่องมือพัฒนาเว็บ (VS Code, Node.js, Browser DevTools) และสร้างเว็บเพจแรก</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">2</td>
+           <td class="px-5 py-4">HTML Fundamentals</td>
+           <td class="px-5 py-4">สร้างหน้าเว็บไซต์โปรไฟล์ส่วนตัวด้วย HTML</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">3</td>
+           <td class="px-5 py-4">CSS Fundamentals</td>
+           <td class="px-5 py-4">ตกแต่งเว็บไซต์ด้วย CSS เช่น color, font, layout</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">4</td>
+           <td class="px-5 py-4">Introduction to JavaScript</td>
+           <td class="px-5 py-4">เขียน JavaScript เพื่อโต้ตอบกับผู้ใช้ เช่น ปุ่มกดคำนวณ</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">5</td>
+           <td class="px-5 py-4">Advanced JavaScript</td>
+           <td class="px-5 py-4">สร้าง interactive form เช่น calculator หรือ todo list</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">6</td>
+           <td class="px-5 py-4">Building Responsive Layouts with Bootstrap and Tailwind</td>
+           <td class="px-5 py-4">สร้างหน้าเว็บไซต์แบบ responsive รองรับมือถือและ desktop</td>
+          </tr>
+          <tr class="week-row border-b border-violet-500/20 bg-violet-600/5">
+           <td class="px-5 py-4 text-yellow-400 font-bold">7</td>
+           <td class="px-5 py-4 text-yellow-300 font-medium">📝 Midterm Project Presentations</td>
+           <td class="px-5 py-4 text-yellow-300/80">นำเสนอเว็บไซต์ที่พัฒนาด้วย HTML + CSS + JavaScript</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">8</td>
+           <td class="px-5 py-4">Introduction to Backend Development using Node.js and Express</td>
+           <td class="px-5 py-4">สร้าง API แรกด้วย Express และเชื่อมต่อกับหน้าเว็บ</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">9</td>
+           <td class="px-5 py-4">Version Control with Git</td>
+           <td class="px-5 py-4">สร้าง Git repository, commit, push ไป GitHub</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">10</td>
+           <td class="px-5 py-4">Database Integration using SQL I</td>
+           <td class="px-5 py-4">สร้าง database และ table ด้วย SQLite</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">11</td>
+           <td class="px-5 py-4">Database Integration using SQL II</td>
+           <td class="px-5 py-4">เขียน query เช่น SELECT, INSERT, UPDATE</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">12</td>
+           <td class="px-5 py-4">Database Integration using NoSQL</td>
+           <td class="px-5 py-4">ทดลองใช้ MongoDB และเชื่อมต่อกับ Node.js</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">13</td>
+           <td class="px-5 py-4">SQL vs. NoSQL: Advantages and Practical Use Cases</td>
+           <td class="px-5 py-4">เปรียบเทียบการสร้าง database ใน SQL และ NoSQL</td>
+          </tr>
+          <tr class="week-row border-b border-white/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">14</td>
+           <td class="px-5 py-4 text-yellow-300 font-medium">📝 Capstone Project Presentation I</td>
+           <td class="px-5 py-4 text-yellow-300/80">นำเสนอความคืบหน้าโปรเจกต์เว็บไซต์เต็มระบบ</td>
+          </tr>
+          <tr class="week-row bg-violet-600/5">
+           <td class="px-5 py-4 text-violet-400 font-bold">15</td>
+           <td class="px-5 py-4 text-yellow-300 font-medium">📝 Capstone Project Presentation II</td>
+           <td class="px-5 py-4 text-yellow-300/80">Demo และนำเสนอผลงาน Final Project</td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div>
+    </section><!-- Materials / Downloads -->
+    <section id="materials" class="py-20 px-4 bg-dark-800/50">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">เอกสารประกอบการเรียน</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div><!-- Lecture Slides -->
+      <div class="mb-10">
+       <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="presentation" class="w-5 h-5 text-violet-400"></i> Lecture Slides</h3>
+       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="lecture-downloads">
+       </div>
+      </div><!-- Workshop Sheets -->
+      <div>
+       <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="file-code" class="w-5 h-5 text-purple-400"></i> Workshop Sheets</h3>
+       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" id="workshop-downloads">
+       </div>
+      </div>
+     </div>
+    </section><!-- Grading -->
+    <section id="grading" class="py-20 px-4">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">การเก็บคะแนนและการประเมินผล</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div><!-- Check Grades Button -->
+      <div class="flex justify-center mb-12">
+       <button id="check-grades-btn" class="btn-primary px-8 py-3 rounded-xl text-white font-semibold flex items-center gap-2 hover:scale-105 transition-transform"> <i data-lucide="search" class="w-5 h-5"></i> ตรวจสอบคะแนนนักศึกษา </button>
+      </div><!-- Grade Check Modal -->
+      <div id="grade-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4" style="backdrop-filter: blur(4px);">
+       <div class="bg-dark-800 rounded-2xl max-w-2xl w-full max-h-96 overflow-y-auto border border-violet-500/20"><!-- Modal Header -->
+        <div class="sticky top-0 bg-gradient-to-r from-violet-600/10 to-purple-600/10 border-b border-violet-500/20 p-6 flex items-center justify-between">
+         <h3 class="text-xl font-bold text-white flex items-center gap-2"><i data-lucide="clipboard-list" class="w-6 h-6 text-violet-400"></i> ตรวจสอบคะแนน</h3><button id="close-modal-btn" class="text-gray-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div><!-- Modal Content -->
+        <div id="modal-content" class="p-6"><!-- Input Form -->
+         <div id="input-form" class="space-y-4">
+          <div>
+           <label class="block text-sm font-medium text-gray-300 mb-2">รหัสนักศึกษา (Student ID)</label> <input id="student-id-input" type="text" placeholder="เช่น 6301234567890" class="w-full px-4 py-3 rounded-xl bg-dark-700 border border-violet-500/20 text-white placeholder-gray-600 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50">
+          </div><button id="submit-grade-btn" class="w-full btn-primary py-3 rounded-xl text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-transform"> <i data-lucide="search" class="w-4 h-4"></i> ค้นหาคะแนน </button>
+         </div><!-- Grade Result (hidden initially) -->
+         <div id="grade-result" class="hidden space-y-4">
+          <div class="bg-violet-600/10 rounded-xl p-4 border border-violet-500/20">
+           <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+             <p class="text-xs text-gray-500 mb-1">รหัสนักศึกษา</p>
+             <p id="result-student-id" class="text-lg font-bold text-white">6301234567890</p>
+            </div>
+            <div>
+             <p class="text-xs text-gray-500 mb-1">เกรดสุดท้าย</p>
+             <p id="result-grade" class="text-lg font-bold text-violet-300">A</p>
+            </div>
+           </div>
+           <div>
+            <p class="text-xs text-gray-500 mb-1">ชื่อ - นามสกุล</p>
+            <p id="result-name" class="text-base font-medium text-white">นายสมชาย ใจดี</p>
+           </div>
+          </div><!-- Score Breakdown -->
+          <div class="space-y-3">
+           <h4 class="font-bold text-white text-sm">รายละเอียดคะแนน</h4>
+           <div class="bg-dark-700 rounded-xl p-4 border border-violet-500/10">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">① เข้าเรียน</span> <span class="text-sm font-bold text-violet-300"><span id="score-attendance">5</span> / 5</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-attendance" class="progress-bar h-full rounded-full" style="width: 100%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-sky-500/10">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">② Quiz</span> <span class="text-sm font-bold text-sky-300"><span id="score-quiz">3</span> / 4</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-quiz" class="progress-bar h-full rounded-full" style="width: 75%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-purple-500/10">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">③ Lab</span> <span class="text-sm font-bold text-purple-300"><span id="score-lab">15</span> / 16</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-lab" class="progress-bar h-full rounded-full" style="width: 94%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-fuchsia-500/20">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">④ Presentation</span> <span class="text-sm font-bold text-fuchsia-300"><span id="score-presentation">5</span> / 5</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-presentation" class="progress-bar h-full rounded-full" style="width: 100%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-pink-500/20">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">⑤ Project</span> <span class="text-sm font-bold text-pink-300"><span id="score-project">24</span> / 25</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-project" class="progress-bar h-full rounded-full" style="width: 96%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-indigo-500/20">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">⑥ Midterm</span> <span class="text-sm font-bold text-indigo-300"><span id="score-midterm">23</span> / 25</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-midterm" class="progress-bar h-full rounded-full" style="width: 92%"></div>
+            </div>
+           </div>
+           <div class="bg-dark-700 rounded-xl p-4 border border-cyan-500/20">
+            <div class="flex justify-between items-center mb-2">
+             <span class="text-sm text-gray-300">⑦ Final</span> <span class="text-sm font-bold text-cyan-300"><span id="score-final">20</span> / 20</span>
+            </div>
+            <div class="w-full h-2.5 rounded-full bg-dark-600 overflow-hidden">
+             <div id="bar-final" class="progress-bar h-full rounded-full" style="width: 100%"></div>
+            </div>
+           </div><!-- Total Score -->
+           <div class="bg-gradient-to-r from-violet-600/20 to-purple-600/20 rounded-xl p-4 border border-violet-500/30">
+            <div class="flex justify-between items-center">
+             <span class="text-base font-bold text-white">รวมทั้งสิ้น</span> <span class="text-2xl font-extrabold text-transparent bg-gradient-to-r from-violet-300 to-purple-300 bg-clip-text"><span id="score-total">95</span> / 100</span>
+            </div>
+           </div>
+          </div><button id="back-btn" class="w-full btn-download py-2 rounded-xl text-violet-300 font-semibold text-sm hover:bg-violet-600/20 transition"> ← ย้อนกลับ </button>
+         </div>
+        </div>
+       </div>
+      </div><!-- Score Breakdown -->
+      <div class="grid md:grid-cols-2 gap-8 mb-12"><!-- Score Items -->
+       <div class="space-y-4">
+        <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-5 h-5 text-violet-400"></i> สัดส่วนคะแนน (100 คะแนน)</h3>
+        <div class="space-y-4" id="score-bars"><!-- Attendance -->
+         <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">สัดส่วนผลการเรียน (ค่ากลาง)</span> <span class="text-violet-400 font-bold">100%</span>
+          </div>
+          <div class="text-xs text-gray-500 mt-3 mb-4">
+           ตามประกาศมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (เกรด A-F)
+          </div>
+         </div><!-- Score Items -->
+         <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">การเข้าเรียนและผลสัมฤทธิ์</span> <span class="text-violet-400 font-bold">ต่อเนื่อง</span>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-dark-700 overflow-hidden">
+           <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Grading Criteria -->
+       <div>
+        <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-violet-400"></i> เกณฑ์วัดผล</h3>
+        <div class="grid grid-cols-2 gap-3">
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           A
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           ≥ 80 คะแนน
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           B+
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           75 – 79
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           B
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           70 – 74
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           C+
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           65 – 69
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           C
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           60 – 64
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           D+
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           55 – 59
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-white">
+           D
+          </div>
+          <div class="text-sm text-violet-400 mt-1">
+           50 – 54
+          </div>
+         </div>
+         <div class="grade-cell rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-red-400">
+           F
+          </div>
+          <div class="text-sm text-red-400/70 mt-1">
+           &lt; 50 คะแนน
+          </div>
+         </div>
+        </div>
+        <div class="card-glass rounded-2xl p-4 mt-4">
+         <p class="text-sm text-gray-400 leading-relaxed"><span class="text-violet-300 font-medium">วิธีประเมินผล:</span> ตามประกาศมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี เรื่อง เกณฑ์การวัดและประเมินผลการศึกษาระดับปริญญาตรี นักศึกษาที่ได้เกรด D ขึ้นไปจึงจะผ่านเกณฑ์</p>
+        </div>
+       </div>
+      </div><!-- Project Details -->
+      <div class="card-glass rounded-2xl p-6">
+       <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="rocket" class="w-5 h-5 text-violet-400"></i> รายละเอียด Project (30%)</h3>
+       <div class="grid sm:grid-cols-3 gap-4">
+        <div class="bg-violet-600/10 rounded-xl p-4 border border-violet-500/10">
+         <div class="text-violet-300 font-bold text-sm mb-2">
+          Proposal &amp; Planning
+         </div>
+         <div class="text-xs text-gray-400">
+          Wireframe, เลือก Tech Stack, แบ่งงาน
+         </div>
+         <div class="text-violet-400 font-bold mt-2">
+          5%
+         </div>
+        </div>
+        <div class="bg-purple-600/10 rounded-xl p-4 border border-purple-500/10">
+         <div class="text-purple-300 font-bold text-sm mb-2">
+          Development &amp; Code
+         </div>
+         <div class="text-xs text-gray-400">
+          คุณภาพ Code, ใช้ Git, Responsive
+         </div>
+         <div class="text-purple-400 font-bold mt-2">
+          15%
+         </div>
+        </div>
+        <div class="bg-fuchsia-600/10 rounded-xl p-4 border border-fuchsia-500/10">
+         <div class="text-fuchsia-300 font-bold text-sm mb-2">
+          Presentation &amp; Deploy
+         </div>
+         <div class="text-xs text-gray-400">
+          นำเสนอ, Deploy, Demo
+         </div>
+         <div class="text-fuchsia-400 font-bold mt-2">
+          10%
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Contact -->
+    <section id="contact" class="py-20 px-4 bg-dark-800/50">
+     <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+       <h2 class="section-title text-3xl font-bold mb-3">ช่องทางติดต่อผู้สอน</h2>
+       <div class="glow-line w-24 mx-auto"></div>
+      </div>
+      <div class="max-w-2xl mx-auto">
+       <div class="card-glass rounded-2xl p-8 text-center transition-all duration-300">
+        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center mx-auto mb-5"><i data-lucide="user" class="w-10 h-10 text-white"></i>
+        </div>
+        <h3 id="contact-name" class="text-xl font-bold text-white mb-1">ดร.อารยา เขียวบริสุทธิ์</h3>
+        <p class="text-violet-400 text-sm mb-6">ภาควิชาคณิตศาสตร์</p>
+        <div class="space-y-3 text-left max-w-sm mx-auto">
+         <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0"><i data-lucide="mail" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div>
+           <p class="text-xs text-gray-500">Email</p>
+           <p id="contact-email" class="text-sm text-gray-300">araya_k@rmutt.ac.th</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div>
+           <p class="text-xs text-gray-500">โทรศัพท์</p>
+           <p class="text-sm text-gray-300">02-549-4150</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0"><i data-lucide="map-pin" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div>
+           <p class="text-xs text-gray-500">ห้องพัก</p>
+           <p class="text-sm text-gray-300">ห้อง ST1301 ชั้น 3 อาคารคณะวิทยาศาสตร์และเทคโนโลยี</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0"><i data-lucide="clock" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div>
+           <p class="text-xs text-gray-500">Office Hours</p>
+           <p class="text-sm text-gray-300">อังคาร &amp; พฤหัสบดี 13:00 – 15:00 น.</p>
+          </div>
+         </div>
+         <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0"><i data-lucide="message-circle" class="w-4 h-4 text-violet-400"></i>
+          </div>
+          <div>
+           <p class="text-xs text-gray-500">LINE Group</p>
+           <p class="text-sm text-gray-300">แสกน QR Code ในห้องเรียนสัปดาห์แรก</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="py-8 px-4 border-t border-white/5 text-center">
+    <p class="text-sm text-gray-500">© 2568 ภาควิชาคณิตศาสตร์ — Modern Website Development</p>
+   </footer>
+  </div>
+  <script>
+    // Default config
+    const defaultConfig = {
+      course_title: 'Modern Website Development',
+      course_title_en: 'Modern Website Development',
+      course_code: '09114338',
+      credits: '3(2-2)',
+      instructor_name: 'ดร.อารยา เขียวบริสุทธิ์',
+      instructor_email: 'araya_k@rmutt.ac.th',
+      semester_info: '2/2568',
+      classroom: 'ห้อง ST1-304 อาคาร SCI01',
+      office_room: 'ห้อง ST1-302',
+      office_hours: 'ทุกวันศุกร์ 09:00 – 12:00 น.'
+    };
+
+    // Generate download cards
+    function generateDownloads() {
+      const lectureContainer = document.getElementById('lecture-downloads');
+      const workshopContainer = document.getElementById('workshop-downloads');
+
+      const lectures = [
+        { week: 1, title: 'Introduction to Modern Web Development' },
+        { week: 2, title: 'HTML Fundamentals' },
+        { week: 3, title: 'CSS Fundamentals' },
+        { week: 4, title: 'Introduction to JavaScript' },
+        { week: 5, title: 'Advanced JavaScript' },
+        { week: 6, title: 'Bootstrap and Tailwind CSS' },
+        { week: 8, title: 'Backend Development (Node.js & Express)' },
+        { week: 9, title: 'Version Control with Git' },
+        { week: 10, title: 'Database Integration SQL I' },
+        { week: 11, title: 'Database Integration SQL II' },
+        { week: 12, title: 'Database Integration NoSQL' },
+        { week: 13, title: 'SQL vs. NoSQL Comparison' }
+      ];
+
+      const workshops = [
+        { week: 1, title: 'Web Development Setup' },
+        { week: 2, title: 'HTML Structure Practice' },
+        { week: 3, title: 'CSS Styling & Layout' },
+        { week: 4, title: 'JavaScript Basics' },
+        { week: 5, title: 'Advanced JS Exercises' },
+        { week: 6, title: 'Responsive Design Workshop' },
+        { week: 8, title: 'Express.js Basics' },
+        { week: 9, title: 'Git Hands-on Lab' },
+        { week: 10, title: 'SQL Database Lab' },
+        { week: 11, title: 'Advanced SQL Queries' },
+        { week: 12, title: 'NoSQL Database Hands-on' }
+      ];
+
+      lectureContainer.innerHTML = lectures.map(l => `
+        <button class="btn-download rounded-xl px-4 py-3 flex items-center gap-3 text-left w-full" onclick="handleDownload('Lecture Week ${l.week}')">
+          <div class="w-8 h-8 rounded-lg bg-violet-600/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-xs font-bold text-violet-400">${l.week}</span>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm font-medium text-gray-200 truncate">${l.title}</p>
+            <p class="text-xs text-gray-500">Lecture ${l.week} — PDF</p>
+          </div>
+          <i data-lucide="download" class="w-4 h-4 text-violet-400 ml-auto flex-shrink-0"></i>
+        </button>
+      `).join('');
+
+      workshopContainer.innerHTML = workshops.map(w => `
+        <button class="btn-download rounded-xl px-4 py-3 flex items-center gap-3 text-left w-full" onclick="handleDownload('Workshop Week ${w.week}')">
+          <div class="w-8 h-8 rounded-lg bg-purple-600/20 flex items-center justify-center flex-shrink-0">
+            <span class="text-xs font-bold text-purple-400">${w.week}</span>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm font-medium text-gray-200 truncate">${w.title}</p>
+            <p class="text-xs text-gray-500">Workshop ${w.week} — PDF</p>
+          </div>
+          <i data-lucide="download" class="w-4 h-4 text-purple-400 ml-auto flex-shrink-0"></i>
+        </button>
+      `).join('');
+    }
+
+    // Download handler with inline toast
+    function handleDownload(name) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-violet-600 text-white px-5 py-3 rounded-xl text-sm font-medium shadow-lg z-50 flex items-center gap-2';
+      toast.innerHTML = `<i data-lucide="info" class="w-4 h-4"></i> "${name}" — ตัวอย่างเท่านั้น (Demo)`;
+      document.body.appendChild(toast);
+      lucide.createIcons({ nodes: [toast] });
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.4s'; setTimeout(() => toast.remove(), 400); }, 2500);
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Apply config to UI
+    function applyConfig(config) {
+      const title = config.course_title || defaultConfig.course_title;
+      const titleEn = config.course_title_en || defaultConfig.course_title_en;
+      const code = config.course_code || defaultConfig.course_code;
+      const credits = config.credits || defaultConfig.credits;
+      const instructor = config.instructor_name || defaultConfig.instructor_name;
+      const email = config.instructor_email || defaultConfig.instructor_email;
+      const semester = config.semester_info || defaultConfig.semester_info;
+      const classroom = config.classroom || defaultConfig.classroom;
+      const officeRoom = config.office_room || defaultConfig.office_room;
+      const officeHours = config.office_hours || defaultConfig.office_hours;
+
+      // Text content
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.innerHTML = title.replace(' ', '<br>');
+      
+      const heroCodeEn = document.getElementById('hero-code-en');
+      if (heroCodeEn) heroCodeEn.textContent = titleEn;
+      
+      const heroCode = document.getElementById('hero-code');
+      if (heroCode) heroCode.textContent = `${code} — ${credits}`;
+      
+      const heroSemester = document.getElementById('hero-semester');
+      if (heroSemester) heroSemester.textContent = `ภาคการศึกษาที่ ${semester}`;
+      
+      const contactName = document.getElementById('contact-name');
+      if (contactName) contactName.textContent = instructor;
+      
+      const contactEmail = document.getElementById('contact-email');
+      if (contactEmail) contactEmail.textContent = email;
+      
+      const lectureRoom = document.getElementById('schedule-lecture-room');
+      if (lectureRoom) lectureRoom.textContent = classroom;
+      
+      const labRoom = document.getElementById('schedule-lab-room');
+      if (labRoom) labRoom.textContent = classroom;
+      
+      const officeRoomEl = document.getElementById('office-room');
+      if (officeRoomEl) officeRoomEl.textContent = officeRoom;
+      
+      const officeHoursEl = document.getElementById('office-hours');
+      if (officeHoursEl) officeHoursEl.textContent = officeHours;
+    }
+
+    // Initialize
+    generateDownloads();
+    initializeScoreBars();
+    lucide.createIcons();
+
+    // Create floating icons animation
+    function createFloatingIcons() {
+      const container = document.getElementById('floating-icons-layer');
+      const icons = ['code-2', 'database', 'server', 'git-branch', 'layout', 'terminal', 'smartphone', 'zap', 'cloud', 'cpu'];
+      
+      icons.forEach((icon, index) => {
+        const floatingIcon = document.createElement('div');
+        floatingIcon.className = `floating-icon float-icon-${index + 1}`;
+        floatingIcon.setAttribute('data-lucide', icon);
+        floatingIcon.style.color = ['#a78bfa', '#c084fc', '#7c3aed', '#a855f7', '#d946ef', '#ec4899', '#a78bfa', '#c084fc', '#7c3aed', '#a855f7'][index];
+        container.appendChild(floatingIcon);
+      });
+      
+      lucide.createIcons();
+    }
+
+    createFloatingIcons();
+
+    // Sample student data with grades
+    const studentGrades = {
+      '6301234567890': { name: 'นายสมชาย ใจดี', attendance: 5, quiz: 3, lab: 15, presentation: 5, project: 24, midterm: 23, final: 20 },
+      '6301234567891': { name: 'นางสาวมัยพร สมศรี', attendance: 5, quiz: 4, lab: 16, presentation: 4, project: 23, midterm: 22, final: 19 },
+      '6301234567892': { name: 'นายอรรถสิทธิ์ ชื่นใจ', attendance: 4, quiz: 3, lab: 14, presentation: 5, project: 22, midterm: 20, final: 18 },
+      '6301234567893': { name: 'นางสาวปนัดดา ใจบริสุทธิ์', attendance: 5, quiz: 4, lab: 16, presentation: 5, project: 25, midterm: 25, final: 20 },
+      '6301234567894': { name: 'นายวรวัฒน์ จริงใจ', attendance: 3, quiz: 2, lab: 12, presentation: 3, project: 18, midterm: 16, final: 14 }
+    };
+
+    // Initialize score bars HTML
+    function initializeScoreBars() {
+      const container = document.getElementById('score-bars');
+      container.innerHTML = `
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">สัดส่วนผลการเรียน</span> <span class="text-violet-400 font-bold">100%</span></div>
+          <div class="text-xs text-gray-500 mt-3 mb-4">ตามประกาศมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">① เข้าเรียน</span> <span class="text-violet-400 font-bold">5 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">② Quiz</span> <span class="text-sky-400 font-bold">4 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">③ Lab</span> <span class="text-purple-400 font-bold">16 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">④ Presentation Project</span> <span class="text-fuchsia-400 font-bold">5 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">⑤ Project</span> <span class="text-pink-400 font-bold">25 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">⑥ Midterm</span> <span class="text-indigo-400 font-bold">25 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5"><span class="text-gray-300">⑦ Final</span> <span class="text-cyan-400 font-bold">20 คะแนน</span></div>
+          <div class="w-full h-2 rounded-full bg-dark-700 overflow-hidden">
+            <div class="progress-bar h-full rounded-full" style="width:100%"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Calculate grade letter
+    function calculateGrade(total) {
+      if (total >= 80) return 'A';
+      if (total >= 75) return 'B+';
+      if (total >= 70) return 'B';
+      if (total >= 65) return 'C+';
+      if (total >= 60) return 'C';
+      if (total >= 55) return 'D+';
+      if (total >= 50) return 'D';
+      return 'F';
+    }
+
+    // Grade check modal functionality
+    const gradeModal = document.getElementById('grade-modal');
+    const checkGradesBtn = document.getElementById('check-grades-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const submitGradeBtn = document.getElementById('submit-grade-btn');
+    const backBtn = document.getElementById('back-btn');
+    const studentIdInput = document.getElementById('student-id-input');
+    const inputForm = document.getElementById('input-form');
+    const gradeResult = document.getElementById('grade-result');
+
+    checkGradesBtn.addEventListener('click', () => {
+      gradeModal.classList.remove('hidden');
+      studentIdInput.focus();
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      gradeModal.classList.add('hidden');
+      inputForm.classList.remove('hidden');
+      gradeResult.classList.add('hidden');
+      studentIdInput.value = '';
+    });
+
+    function showGradeResult(studentId) {
+      const data = studentGrades[studentId];
+      if (!data) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-red-600 text-white px-5 py-3 rounded-xl text-sm font-medium shadow-lg z-50 flex items-center gap-2';
+        toast.innerHTML = '<i data-lucide="alert-circle" class="w-4 h-4"></i> ไม่พบรหัสนักศึกษาในระบบ';
+        document.body.appendChild(toast);
+        lucide.createIcons({ nodes: [toast] });
+        setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.4s'; setTimeout(() => toast.remove(), 400); }, 2500);
+        return;
+      }
+
+      const total = data.attendance + data.quiz + data.lab + data.presentation + data.project + data.midterm + data.final;
+      const grade = calculateGrade(total);
+
+      // Update results
+      document.getElementById('result-student-id').textContent = studentId;
+      document.getElementById('result-name').textContent = data.name;
+      document.getElementById('result-grade').textContent = grade;
+      
+      document.getElementById('score-attendance').textContent = data.attendance;
+      document.getElementById('bar-attendance').style.width = (data.attendance / 5 * 100) + '%';
+      
+      document.getElementById('score-quiz').textContent = data.quiz;
+      document.getElementById('bar-quiz').style.width = (data.quiz / 4 * 100) + '%';
+      
+      document.getElementById('score-lab').textContent = data.lab;
+      document.getElementById('bar-lab').style.width = (data.lab / 16 * 100) + '%';
+      
+      document.getElementById('score-presentation').textContent = data.presentation;
+      document.getElementById('bar-presentation').style.width = (data.presentation / 5 * 100) + '%';
+      
+      document.getElementById('score-project').textContent = data.project;
+      document.getElementById('bar-project').style.width = (data.project / 25 * 100) + '%';
+      
+      document.getElementById('score-midterm').textContent = data.midterm;
+      document.getElementById('bar-midterm').style.width = (data.midterm / 25 * 100) + '%';
+      
+      document.getElementById('score-final').textContent = data.final;
+      document.getElementById('bar-final').style.width = (data.final / 20 * 100) + '%';
+      
+      document.getElementById('score-total').textContent = total;
+
+      // Show result, hide form
+      inputForm.classList.add('hidden');
+      gradeResult.classList.remove('hidden');
+    }
+
+    submitGradeBtn.addEventListener('click', () => {
+      const studentId = studentIdInput.value.trim();
+      if (!studentId) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-yellow-600 text-white px-5 py-3 rounded-xl text-sm font-medium shadow-lg z-50 flex items-center gap-2';
+        toast.innerHTML = '<i data-lucide="info" class="w-4 h-4"></i> กรุณากรอกรหัสนักศึกษา';
+        document.body.appendChild(toast);
+        lucide.createIcons({ nodes: [toast] });
+        setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.4s'; setTimeout(() => toast.remove(), 400); }, 2500);
+        return;
+      }
+      showGradeResult(studentId);
+    });
+
+    backBtn.addEventListener('click', () => {
+      inputForm.classList.remove('hidden');
+      gradeResult.classList.add('hidden');
+      studentIdInput.value = '';
+      studentIdInput.focus();
+    });
+
+    // Close result button
+    const closeResultBtn = document.getElementById('close-result-btn');
+    if (closeResultBtn) {
+      closeResultBtn.addEventListener('click', () => {
+        gradeModal.classList.add('hidden');
+        inputForm.classList.remove('hidden');
+        gradeResult.classList.add('hidden');
+        studentIdInput.value = '';
+      });
+    }
+
+    // Allow Enter key to submit
+    studentIdInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitGradeBtn.click();
+    });
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: async (config) => {
+          applyConfig(config);
+          lucide.createIcons();
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['course_title', config.course_title || defaultConfig.course_title],
+          ['course_title_en', config.course_title_en || defaultConfig.course_title_en],
+          ['course_code', config.course_code || defaultConfig.course_code],
+          ['credits', config.credits || defaultConfig.credits],
+          ['instructor_name', config.instructor_name || defaultConfig.instructor_name],
+          ['instructor_email', config.instructor_email || defaultConfig.instructor_email],
+          ['semester_info', config.semester_info || defaultConfig.semester_info],
+          ['classroom', config.classroom || defaultConfig.classroom],
+          ['office_room', config.office_room || defaultConfig.office_room],
+          ['office_hours', config.office_hours || defaultConfig.office_hours]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc89538f79d7337',t:'MTc3MzU0NjkzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
