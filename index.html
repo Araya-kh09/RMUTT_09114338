@@ -233,8 +233,15 @@
 
           <div class="hidden md:flex items-center gap-3">
             <div class="search-box rounded-2xl px-4 py-3 flex items-center gap-3 text-slate-500 min-w-[260px]">
-              <i data-lucide="search" class="w-4 h-4"></i>
-              <span class="text-sm">ค้นหาข้อมูลในรายวิชา...</span>
+              <i data-lucide="search" class="w-4 h-4 shrink-0"></i>
+              <input
+                id="course-search-input"
+                type="search"
+                placeholder="ค้นหาข้อมูลในรายวิชา..."
+                aria-label="ค้นหาข้อมูลในรายวิชา"
+                autocomplete="off"
+                class="w-full min-w-0 bg-transparent text-sm text-slate-700 placeholder:text-slate-400 outline-none border-0 p-0"
+              />
             </div>
             <button class="w-11 h-11 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-card relative">
               <i data-lucide="bell" class="w-5 h-5 text-slate-600"></i>
@@ -1023,6 +1030,37 @@
         document.getElementById('mobile-menu').classList.toggle('hidden');
       });
       document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
+
+      // Course search: type a keyword and press Enter to jump to the first matching section.
+      const courseSearchInput = document.getElementById('course-search-input');
+      if (courseSearchInput) {
+        const runCourseSearch = () => {
+          const query = courseSearchInput.value.trim().toLocaleLowerCase('th-TH');
+          if (!query) return;
+
+          const searchableSections = [...document.querySelectorAll('main section')];
+          const match = searchableSections.find(section =>
+            section.textContent.toLocaleLowerCase('th-TH').includes(query)
+          );
+
+          if (match) {
+            match.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast(`พบข้อมูลที่เกี่ยวข้องกับ “${courseSearchInput.value.trim()}”`, 'success');
+          } else {
+            showToast(`ไม่พบข้อมูลสำหรับ “${courseSearchInput.value.trim()}”`, 'warn');
+          }
+        };
+
+        courseSearchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            runCourseSearch();
+          } else if (e.key === 'Escape') {
+            courseSearchInput.value = '';
+            courseSearchInput.blur();
+          }
+        });
+      }
 
       const reveals = document.querySelectorAll('.reveal');
       const revealObserver = new IntersectionObserver(entries => {
