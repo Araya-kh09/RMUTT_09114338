@@ -368,7 +368,7 @@
                         <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i data-lucide="calendar-days" class="w-5 h-5"></i></div>
                         <div>
                           <div class="text-base font-semibold text-ink-900">สัปดาห์นี้</div>
-                          <div class="text-sm text-slate-500">Week 6: Backend Basics</div>
+                          <div class="text-sm text-slate-500">Week 6: Advanced JavaScript II</div>
                         </div>
                       </div>
                       <div class="space-y-3 text-sm">
@@ -521,19 +521,19 @@
 
       <section id="materials" class="px-4 sm:px-6 lg:px-8 mt-10 scroll-section">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-5">
-          <div class="soft-card rounded-[30px] p-6 reveal">
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="presentation" class="w-5 h-5"></i></div><h2 class="text-2xl section-title">Lecture Slides</h2></div>
-              <span class="text-sm text-slate-500">เอกสารประกอบการสอน</span>
+          <div class="soft-card rounded-[30px] p-6 reveal min-w-0 overflow-hidden">
+            <div class="flex items-center justify-between mb-6 gap-3">
+              <div class="flex items-center gap-3 min-w-0"><div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0"><i data-lucide="presentation" class="w-5 h-5"></i></div><h2 class="text-2xl section-title min-w-0">Lecture Slides</h2></div>
+              <span class="text-sm text-slate-500 shrink-0">เอกสารประกอบการสอน</span>
             </div>
-            <div id="lecture-downloads" class="grid gap-3"></div>
+            <div id="lecture-downloads" class="grid gap-3 min-w-0"></div>
           </div>
-          <div class="soft-card rounded-[30px] p-6 reveal">
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center"><i data-lucide="file-code-2" class="w-5 h-5"></i></div><h2 class="text-2xl section-title">Workshop Sheets</h2></div>
-              <span class="text-sm text-slate-500">ใบงานและแบบฝึกปฏิบัติ</span>
+          <div class="soft-card rounded-[30px] p-6 reveal min-w-0 overflow-hidden">
+            <div class="flex items-center justify-between mb-6 gap-3">
+              <div class="flex items-center gap-3 min-w-0"><div class="w-12 h-12 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0"><i data-lucide="file-code-2" class="w-5 h-5"></i></div><h2 class="text-2xl section-title min-w-0">Workshop Sheets</h2></div>
+              <span class="text-sm text-slate-500 shrink-0">ใบงานและแบบฝึกปฏิบัติ</span>
             </div>
-            <div id="workshop-downloads" class="grid gap-3"></div>
+            <div id="workshop-downloads" class="grid gap-3 min-w-0"></div>
           </div>
         </div>
       </section>
@@ -747,50 +747,53 @@
     };
 
     const outlineData = [
-      { week: 1, lecture: 'Introduction to Modern Web Development', lab: 'ติดตั้งเครื่องมือพัฒนาเว็บ (VS Code, Node.js, Browser DevTools) และสร้างเว็บเพจแรก' },
-      { week: 2, lecture: 'HTML Fundamentals', lab: 'สร้างหน้าเว็บไซต์โปรไฟล์ส่วนตัวด้วย HTML' },
-      { week: 3, lecture: 'CSS Fundamentals', lab: 'ตกแต่งเว็บไซต์ด้วย CSS เช่น color, font, layout' },
-      { week: 4, lecture: 'Introduction to JavaScript', lab: 'เขียน JavaScript เพื่อโต้ตอบกับผู้ใช้ เช่น ปุ่มกดคำนวณ' },
-      { week: 5, lecture: 'Advanced JavaScript', lab: 'สร้าง interactive form เช่น calculator หรือ todo list' },
-      { week: 6, lecture: 'Building Responsive Layouts with Bootstrap and Tailwind', lab: 'สร้างหน้าเว็บไซต์แบบ responsive รองรับมือถือและ desktop' },
-      { week: 7, lecture: '📝 Midterm Project Presentations', lab: 'นำเสนอเว็บไซต์ที่พัฒนาด้วย HTML + CSS + JavaScript', highlight: true },
-      { week: 8, lecture: 'Introduction to Backend Development using Node.js and Express', lab: 'สร้าง API แรกด้วย Express และเชื่อมต่อกับหน้าเว็บ' },
-      { week: 9, lecture: 'Version Control with Git', lab: 'สร้าง Git repository, commit, push ไป GitHub' },
-      { week: 10, lecture: 'Database Integration using SQL I', lab: 'สร้าง database และ table ด้วย SQLite' },
-      { week: 11, lecture: 'Database Integration using SQL II', lab: 'เขียน query เช่น SELECT, INSERT, UPDATE' },
-      { week: 12, lecture: 'Database Integration using NoSQL', lab: 'ทดลองใช้ MongoDB และเชื่อมต่อกับ Node.js' },
-      { week: 13, lecture: 'SQL vs. NoSQL: Advantages and Practical Use Cases', lab: 'เปรียบเทียบการสร้าง database ใน SQL และ NoSQL' },
-      { week: 14, lecture: '📝 Capstone Project Presentation I', lab: 'นำเสนอความคืบหน้าโปรเจกต์เว็บไซต์เต็มระบบ', highlight: true },
-      { week: 15, lecture: '📝 Capstone Project Presentation II', lab: 'Demo และนำเสนอผลงาน Final Project', highlight: true }
+      { week: 1, lecture: 'HTML Fundamentals I', lab: 'The first Web page' },
+      { week: 2, lecture: 'HTML Fundamentals II', lab: 'HTML Structure Practice' },
+      { week: 3, lecture: 'CSS Fundamentals', lab: 'CSS Styling & Layout' },
+      { week: 4, lecture: 'Introduction to JavaScript', lab: 'JavaScript Basics' },
+      { week: 5, lecture: 'Advanced JavaScript I', lab: 'Advanced JS Exercises I' },
+      { week: 6, lecture: 'Advanced JavaScript II', lab: 'Advanced JS Exercises II' },
+      { week: 7, lecture: 'Building Responsive Layouts with Bootstrap and Tailwind', lab: 'Responsive Design Workshop' },
+      { week: 8, lecture: '📝 Midterm Exam', lab: '—', highlight: true },
+      { week: 9, lecture: 'Introduction to Backend Development using Node.js and Express Framework', lab: 'Node.js & Express REST API Basics' },
+      { week: 10, lecture: 'Version Control with Git', lab: 'Git Hands-on Lab' },
+      { week: 11, lecture: 'Database Integration using SQL I', lab: 'SQL Database Lab' },
+      { week: 12, lecture: 'Database Integration using SQL II', lab: 'Advanced SQL Queries' },
+      { week: 13, lecture: 'Database Integration using NoSQL', lab: 'NoSQL Database Hands-on' },
+      { week: 14, lecture: 'SQL vs. No-SQL: Advantages and practical use cases', lab: 'SQLite CRUD Hands-on Lab' },
+      { week: 15, lecture: '📝 Final Exam', lab: '—', highlight: true }
     ];
 
     const lectures = [
-      { week: 1, title: 'Introduction to Modern Web Development' },
-      { week: 2, title: 'HTML Fundamentals' },
-      { week: 3, title: 'CSS Fundamentals' },
-      { week: 4, title: 'Introduction to JavaScript' },
-      { week: 5, title: 'Advanced JavaScript' },
-      { week: 6, title: 'Bootstrap and Tailwind CSS' },
-      { week: 8, title: 'Backend Development (Node.js & Express)' },
-      { week: 9, title: 'Version Control with Git' },
-      { week: 10, title: 'Database Integration SQL I' },
-      { week: 11, title: 'Database Integration SQL II' },
-      { week: 12, title: 'Database Integration NoSQL' },
-      { week: 13, title: 'SQL vs. NoSQL Comparison' }
+      { week: 1, file: 1, title: 'HTML Fundamentals I' },
+      { week: 2, file: 2, title: 'HTML Fundamentals II' },
+      { week: 3, file: 3, title: 'CSS Fundamentals' },
+      { week: 4, file: 4, title: 'Introduction to JavaScript' },
+      { week: 5, file: 5, title: 'Advanced JavaScript I' },
+      { week: 6, file: 6, title: 'Advanced JavaScript II' },
+      { week: 7, file: 7, title: 'Building Responsive Layouts with Bootstrap and Tailwind' },
+      { week: 9, file: 8, title: 'Introduction to Backend Development using Node.js and Express Framework' },
+      { week: 10, file: 9, title: 'Version Control with Git' },
+      { week: 11, file: 10, title: 'Database Integration using SQL I' },
+      { week: 12, file: 11, title: 'Database Integration using SQL II' },
+      { week: 13, file: 12, title: 'Database Integration using NoSQL' },
+      { week: 14, file: 13, title: 'SQL vs. No-SQL: Advantages and practical use cases' }
     ];
 
     const workshops = [
-      { week: 1, title: 'Web Development Setup' },
-      { week: 2, title: 'HTML Structure Practice' },
-      { week: 3, title: 'CSS Styling & Layout' },
-      { week: 4, title: 'JavaScript Basics' },
-      { week: 5, title: 'Advanced JS Exercises' },
-      { week: 6, title: 'Responsive Design Workshop' },
-      { week: 8, title: 'Express.js Basics' },
-      { week: 9, title: 'Git Hands-on Lab' },
-      { week: 10, title: 'SQL Database Lab' },
-      { week: 11, title: 'Advanced SQL Queries' },
-      { week: 12, title: 'NoSQL Database Hands-on' }
+      { week: 1, file: 1, title: 'The first Web page' },
+      { week: 2, file: 2, title: 'HTML Structure Practice' },
+      { week: 3, file: 3, title: 'CSS Styling & Layout' },
+      { week: 4, file: 4, title: 'JavaScript Basics' },
+      { week: 5, file: 5, title: 'Advanced JS Exercises I' },
+      { week: 6, file: 6, title: 'Advanced JS Exercises II' },
+      { week: 7, file: 7, title: 'Responsive Design Workshop' },
+      { week: 9, file: 8, title: 'Node.js & Express REST API Basics' },
+      { week: 10, file: 9, title: 'Git Hands-on Lab' },
+      { week: 11, file: 10, title: 'SQL Database Lab' },
+      { week: 12, file: 11, title: 'Advanced SQL Queries' },
+      { week: 13, file: 12, title: 'NoSQL Database Hands-on' },
+      { week: 14, file: 13, title: 'SQLite CRUD Hands-on Lab' }
     ];
 
     const studentGrades = {
@@ -864,25 +867,25 @@
       const lectureContainer = document.getElementById('lecture-downloads');
       const workshopContainer = document.getElementById('workshop-downloads');
       lectureContainer.innerHTML = lectures.map(item => `
-        <button onclick="handleDownload('Lecture Week ${item.week}')" class="rounded-2xl border border-slate-200 bg-white/85 px-4 py-4 text-left hover:border-brand-200 hover:shadow-card transition flex items-center gap-4">
+        <a href="lecture/week${item.file}.pdf" download class="w-full min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white/85 px-4 py-4 text-left hover:border-brand-200 hover:shadow-card transition flex items-center gap-4">
           <div class="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0"><i data-lucide="file-text" class="w-5 h-5"></i></div>
           <div class="min-w-0 flex-1">
-            <div class="font-semibold text-slate-800 truncate">${item.title}</div>
-            <div class="text-sm text-slate-500 mt-1">Lecture ${item.week} — PDF</div>
+            <div class="font-semibold text-slate-800 leading-6 break-words">${item.title}</div>
+            <div class="text-sm text-slate-500 mt-1">Week ${item.week} — PDF</div>
           </div>
           <i data-lucide="download" class="w-5 h-5 text-brand-500 shrink-0"></i>
-        </button>
+        </a>
       `).join('');
 
       workshopContainer.innerHTML = workshops.map(item => `
-        <button onclick="handleDownload('Workshop Week ${item.week}')" class="rounded-2xl border border-slate-200 bg-white/85 px-4 py-4 text-left hover:border-violet-200 hover:shadow-card transition flex items-center gap-4">
+        <a href="workshop/lab${item.file}.pdf" download class="w-full min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white/85 px-4 py-4 text-left hover:border-violet-200 hover:shadow-card transition flex items-center gap-4">
           <div class="w-11 h-11 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0"><i data-lucide="file-code-2" class="w-5 h-5"></i></div>
           <div class="min-w-0 flex-1">
-            <div class="font-semibold text-slate-800 truncate">${item.title}</div>
-            <div class="text-sm text-slate-500 mt-1">Workshop ${item.week} — PDF</div>
+            <div class="font-semibold text-slate-800 leading-6 break-words">${item.title}</div>
+            <div class="text-sm text-slate-500 mt-1">Week ${item.week} — PDF</div>
           </div>
           <i data-lucide="download" class="w-5 h-5 text-violet-500 shrink-0"></i>
-        </button>
+        </a>
       `).join('');
     }
 
